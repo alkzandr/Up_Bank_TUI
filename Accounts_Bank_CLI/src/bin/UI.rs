@@ -8,7 +8,7 @@ use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::{
     buffer::Buffer,
     layout::Rect,
-    style::Stylize,
+    style::{Stylize, Color},
     symbols::border,
     text::{Line, Text},
     widgets::{Block, Paragraph, Tabs, Widget},
@@ -53,20 +53,17 @@ struct ApiResponse {
 }
 // ------------- End JSON parsing code ----------------------------------------------------------------------------------------------------------
 
-
-
 fn main() -> io::Result<()> {
-//------------Code for parsing JSON data into UI ----------------------------------------------------------------------------------------------------------------------------
-    // let file = File::open("data.json")?;
+    // Load the JSON file and parse it into ApiResponse
+    let file = File::open("accounts_balance.json")?;
+    let api_response: ApiResponse = serde_json::from_reader(file).expect("Error parsing JSON");
 
-
-
-
-
-// -------------- End JSON parsing code ---------------------------------------------------------------------------------------------------------
-
+    // Initialize the terminal
     let mut terminal = ratatui::init();
-    let app_result = App::default().run(&mut terminal);
+
+    // Create the App and pass the api_response to it
+    let app_result = App::default().with_api_response(api_response).run(&mut terminal);
+
     ratatui::restore();
     app_result
 }
@@ -76,9 +73,15 @@ pub struct App {
     counter: u8,
     exit: bool,
     tab_index: usize,
+    api_response: Option<ApiResponse>,
 }
 
 impl App {
+    pub fn with_api_response(mut self, api_response: ApiResponse) -> Self {
+        self.api_response = Some(api_response);
+        self
+    }
+
     pub fn run(&mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         while !self.exit {
             terminal.draw(|frame| self.draw(frame))?;
@@ -161,10 +164,19 @@ impl Widget for &App {
             .select(self.tab_index)
             .block(Block::bordered());
 
+        // Access the first account's data from api_response
+        let display_name = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.display_name);
+        let account_id = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.account_id);
+        let balance = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.balance.value);
+
         let content = match self.tab_index {
             0 => Text::from(vec![Line::from(vec![
-                "Value: ".into(),
-                self.counter.to_string().yellow(),
+                "Display Name: ".into(),
+                display_name.yellow(),
+                "\nAccount ID: ".into(),
+                account_id.yellow(),
+                "\nBalance: ".into(),
+                balance.yellow(),
             ])]),
             1 => Text::from("NAME: {} \n ACCOUNT:{} \n BALANCE:{} \n "),
             2 => Text::from("Settings Tab: Adjust settings here."),
