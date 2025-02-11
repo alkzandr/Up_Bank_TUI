@@ -1,0 +1,1 @@
+/Users/alex/Documents/emacsFiles/rust_files/Up_Banking_App/Accounts_Bank_CLI/target/debug/accounts_balance: /Users/alex/Documents/emacsFiles/rust_files/Up_Banking_App/Accounts_Bank_CLI/src/bin/accounts_balance.rs

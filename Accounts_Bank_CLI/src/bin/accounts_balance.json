@@ -1,0 +1,102 @@
+{
+  "data": [
+    {
+      "id": "c9907cb6-91ce-4140-b214-d8ec72578901",
+      "attributes": {
+        "displayName": "Spending",
+        "accountType": "TRANSACTIONAL",
+        "ownershipType": "INDIVIDUAL",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "34.84",
+          "valueInBaseUnits": 3484
+        },
+        "createdAt": "2021-09-25T19:16:22+10:00"
+      }
+    },
+    {
+      "id": "64f9db37-486e-41fc-8119-d8bec3a1fac2",
+      "attributes": {
+        "displayName": "💰 Savings",
+        "accountType": "SAVER",
+        "ownershipType": "INDIVIDUAL",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "0.22",
+          "valueInBaseUnits": 22
+        },
+        "createdAt": "2021-09-25T20:16:31+10:00"
+      }
+    },
+    {
+      "id": "96fea2f3-4b70-423a-ad37-fadb0e68cd1a",
+      "attributes": {
+        "displayName": "🚗 Car registration ",
+        "accountType": "SAVER",
+        "ownershipType": "INDIVIDUAL",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "1.72",
+          "valueInBaseUnits": 172
+        },
+        "createdAt": "2021-09-25T20:31:14+10:00"
+      }
+    },
+    {
+      "id": "331b1225-3222-443c-8f49-e319cf3b8d0d",
+      "attributes": {
+        "displayName": "🍺 Activities",
+        "accountType": "SAVER",
+        "ownershipType": "INDIVIDUAL",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "0.74",
+          "valueInBaseUnits": 74
+        },
+        "createdAt": "2021-09-25T20:36:04+10:00"
+      }
+    },
+    {
+      "id": "b21b2fed-e6a6-439c-835a-487ed1727b4d",
+      "attributes": {
+        "displayName": "2Up Spending",
+        "accountType": "TRANSACTIONAL",
+        "ownershipType": "JOINT",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "212.00",
+          "valueInBaseUnits": 21200
+        },
+        "createdAt": "2021-10-09T12:15:37+11:00"
+      }
+    },
+    {
+      "id": "53a23766-ed6d-478a-a326-a5dc46212909",
+      "attributes": {
+        "displayName": "🏠 House deposit",
+        "accountType": "SAVER",
+        "ownershipType": "JOINT",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "485.91",
+          "valueInBaseUnits": 48591
+        },
+        "createdAt": "2021-10-09T12:19:33+11:00"
+      }
+    },
+    {
+      "id": "1811ee94-d2b9-4bd4-b99c-8cc4fe6efa8b",
+      "attributes": {
+        "displayName": "🐶 Sadie 🐶",
+        "accountType": "SAVER",
+        "ownershipType": "JOINT",
+        "balance": {
+          "currencyCode": "AUD",
+          "value": "414.31",
+          "valueInBaseUnits": 41431
+        },
+        "createdAt": "2022-02-01T18:44:52+11:00"
+      }
+    }
+  ]
+}
