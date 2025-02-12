@@ -145,7 +145,7 @@ impl Widget for &App {
         let title = Line::from(" Up Bank CLI ".bold());
         let instructions = Line::from(vec![
             " Decrement ".into(),
-            "<Left>".blue().bold(),
+            "<Left>".blue().bold(), // In future change these to move up and down for selecting things
             " Increment ".into(),
             "<Right>".blue().bold(),
             " Next Tab ".into(),
@@ -165,20 +165,48 @@ impl Widget for &App {
             .block(Block::bordered());
 
         // Access the first account's data from api_response
-        let display_name = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.display_name);
-        let account_id = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.account_id);
-        let balance = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.balance.value);
+        let display_name1 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.display_name);
+        let account_id1 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.account_id);
+        let balance1 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.balance.value);
+        let account_type1 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.account_type);
+        let currency_code1 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(0)).map_or("N/A", |account| &account.attributes.balance.currency_code);
+        let display_name2 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(1)).map_or("N/A", |account| &account.attributes.display_name);
+        let account_id2 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(1)).map_or("N/A", |account| &account.account_id);
+        let balance2 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(1)).map_or("N/A", |account| &account.attributes.balance.value);
+        let account_type2 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(1)).map_or("N/A", |account| &account.attributes.account_type);
+        let currency_code2 = self.api_response.as_ref().and_then(|api_response| api_response.data.get(1)).map_or("N/A", |account| &account.attributes.balance.currency_code);
 
         let content = match self.tab_index {
-            0 => Text::from(vec![Line::from(vec![
-                "Display Name: ".into(),
-                display_name.yellow(),
-                "\nAccount ID: ".into(),
-                account_id.yellow(),
-                "\nBalance: ".into(),
-                balance.yellow(),
-            ])]),
-            1 => Text::from("NAME: {} \n ACCOUNT:{} \n BALANCE:{} \n "),
+            0 => Text::from(vec![
+                Line::from(vec!["Display Name: ".into(), display_name1.yellow()]),
+                //Line::from(vec!["Account ID: ".into(), account_id1.yellow()]),
+                Line::from(vec!["Account Type: ".into(), account_type1.yellow()]),
+                Line::from(vec![
+                    "Balance: ".into(),
+                    balance1.yellow(),
+                    " ".into(),
+                    currency_code1.yellow(),
+                ])
+            ]),
+
+
+
+
+
+
+
+            1 => Text::from(vec![
+                Line::from(vec!["Display Name: ".into(), display_name2.yellow()]),
+                //Line::from(vec!["Account ID: ".into(), account_id2.yellow()]),
+                Line::from(vec!["Account Type: ".into(), account_type2.yellow()]),
+                Line::from(vec![
+                    "Balance: ".into(),
+                    balance2.yellow(),
+                    " ".into(),
+                    currency_code2.yellow(),
+                ])
+            ]),
+
             2 => Text::from("Settings Tab: Adjust settings here."),
             3 => Text::from("Spending trends graphed or a transactions search algorithm?"),
             _ => unreachable!(),
